@@ -1,4 +1,4 @@
-q# Recurrent Neural Network
+# Recurrent Neural Network
 
 
 
@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 # Importing the training set
-dataset_train = pd.read_csv('ITC_train.csv')
+dataset_train = pd.read_csv('infosys_train.csv')
 training_set = dataset_train.iloc[:,0:].values
 
 # Feature Scaling
@@ -22,15 +22,13 @@ training_set_scaled = sc.fit_transform(training_set)
 # Creating a data structure with 60 DAYsteps and 1 output
 X_train = []
 y_train = []
-for i in range(120, 2416):
+for i in range(120, 2425):
     X_train.append(training_set_scaled[i-120:i])
     y_train.append(training_set_scaled[i])
 X_train, y_train = np.array(X_train), np.array(y_train)
 
 # Reshaping
 X_train = np.reshape(X_train, (X_train.shape[0], X_train.shape[1], 5))
-
-
 
 # Part 2 - Building the RNN
 
@@ -72,7 +70,7 @@ regressor.fit(X_train, y_train, epochs = 100, batch_size = 32)
 # Part 3 - Making the predictions and visualising the results
 
 # Getting the real stock price of 2017
-dataset_test = pd.read_csv('ITC_test.csv')
+dataset_test = pd.read_csv('infosys_test.csv')
 real_stock_price = dataset_test.iloc[:, 0:].values
 #dataset_train = dataset_train.drop(col, axis =1)
 #dataset_test = dataset_test.drop(col,  axis =1)
@@ -91,44 +89,44 @@ predicted_stock_price = regressor.predict(X_test)
 predicted_stock_price = sc.inverse_transform(predicted_stock_price)
 #predicted_stock_price.to_csv('open-low')
 # Visualising the results 
-plt.plot(real_stock_price[1:,0], color = 'red', marker = 'o', label = 'Real ITC Stock Open Price')
-plt.plot(predicted_stock_price[:,0], color = 'blue', marker = 'o',label = 'Predicted ITC Open Stock Price')
-plt.title('ITC Stock Price Prediction')
+plt.plot(real_stock_price[1:,0], color = 'red', marker = 'o', label = 'Real infosys Stock Open Price')
+plt.plot(predicted_stock_price[:,0], color = 'blue', marker = 'o',label = 'Predicted infosys Open Stock Price')
+plt.title('infosys Stock Price Prediction')
 plt.xlabel('DAY')
-plt.ylabel('ITC Stock Price')
+plt.ylabel('infosys Stock Price')
 plt.legend()
 plt.show()
-pd.DataFrame(predicted_stock_price).to_csv("predicted_values_project.csv")
+pd.DataFrame(predicted_stock_price).to_csv("predicted_values_infosys.csv")
 
 
-plt.plot(real_stock_price[1:,1], color = 'red', marker = 'o', label = 'Real ITC Stock High Price')
-plt.plot(predicted_stock_price[:,1], color = 'blue', marker = 'o',label = 'Predicted ITC High Stock Price')
-plt.title('ITC Stock Price Prediction')
+plt.plot(real_stock_price[1:,1], color = 'red', marker = 'o', label = 'Real infosys Stock High Price')
+plt.plot(predicted_stock_price[:,1], color = 'blue', marker = 'o',label = 'Predicted infosys High Stock Price')
+plt.title('infosys Stock Price Prediction')
 plt.xlabel('DAY')
-plt.ylabel('ITC Stock Price')
-plt.legend()
-plt.show()
-
-
-plt.plot(real_stock_price[1:,2], color = 'red',  marker = 'o',label = 'Real ITC Stock Low  Price')
-plt.plot(predicted_stock_price[:,2], color = 'blue', marker = 'o',label = 'Predicted ITC Stock Low Price')
-plt.title('ITC Stock Price Prediction')
-plt.xlabel('DAY')
-plt.ylabel('ITC Stock Price')
+plt.ylabel('infosys Stock Price')
 plt.legend()
 plt.show()
 
-plt.plot(real_stock_price[1:,3], color = 'red', marker = 'o',label = 'Real ITC  Close Price')
-plt.plot(predicted_stock_price[:,3], color = 'blue', marker = 'o',label = 'Predicted ITC Stock Close Price')
-plt.title('ITCn Stock Price Prediction')
+
+plt.plot(real_stock_price[1:,2], color = 'red',  marker = 'o',label = 'Real infosys Stock Low  Price')
+plt.plot(predicted_stock_price[:,2], color = 'blue', marker = 'o',label = 'Predicted infosys Stock Low Price')
+plt.title('infosys  Stock Price Prediction')
+plt.xlabel('DAY')
+plt.ylabel('infosys Stock Price')
+plt.legend()
+plt.show()
+
+plt.plot(real_stock_price[1:,3], color = 'red', marker = 'o',label = 'Real infosys Close Price')
+plt.plot(predicted_stock_price[:,3], color = 'blue', marker = 'o',label = 'Predicted infosys Stock Close Price')
+plt.title('infosys  Stock Price Prediction')
 plt.xlabel('Date')
-plt.ylabel('ITC Paint Stock Price')
-#plt.xticks(date.,date['Date'].values)
+plt.ylabel('infosysn Stock Price')
+#plt.xticks(date.index,date['Date'].values)
 plt.legend()
 plt.show()
 
-pd.DataFrame(predicted_stock_price).to_csv("predicted_values_itc.csv")
-#regressor.save("ITC.h5")
+#pd.DataFrame(predicted_stock_price).to_csv("predicted_values_project.csv")
+regressor.save("infosys.h5")
 
-from keras.models import load_model
-regressor=load_model('ITC.h5')
+#from keras.models import load_model
+#regressor=load_model('infosys.h5')
