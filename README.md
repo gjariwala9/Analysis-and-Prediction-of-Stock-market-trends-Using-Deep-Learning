@@ -24,6 +24,7 @@ Kmeans clustering is used to create this module
 ## Code and Resources Used 
 **Python Version:** 3.8  
 **Packages:** pandas, numpy, sklearn, matplotlib, selenium, keras, tensorflow
+**Data Visualisation:** Tableau
 
 ## Web Scraping
 Wrote a python script to scrap news headlines for each stock from moneycontrol.com. With each stock, we got the following:
