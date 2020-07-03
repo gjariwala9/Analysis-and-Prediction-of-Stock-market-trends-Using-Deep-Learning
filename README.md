@@ -24,6 +24,7 @@ Kmeans clustering is used to create this module
 ## Code and Resources Used 
 **Python Version:** 3.8  
 **Packages:** pandas, numpy, sklearn, matplotlib, selenium, keras, tensorflow
+
 **Data Visualisation:** Tableau
 
 ## Web Scraping
